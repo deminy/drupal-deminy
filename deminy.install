@@ -9,6 +9,9 @@
  * Implements hook_enable().
  */
 function deminy_enable() {
+  // Redirect 403 responses for pathes like blog/* from deminy.net
+  variable_set('site_403', 'r4034blog');
+
   $report = array();
   _locale_import_one_string_db(
     $report,
@@ -26,4 +29,10 @@ function deminy_enable() {
  * Implements hook_disable().
  */
 function deminy_disable() {
+  if (module_exists('r4032login')) {
+    variable_set('site_403', 'r4032login');
+  }
+  else {
+    variable_del('site_403');
+  }
 }

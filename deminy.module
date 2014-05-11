@@ -8,6 +8,50 @@
  */
 
 /**
+ * Implements hook_menu().
+ */
+function deminy_menu() {
+  return array(
+    'r4034blog' => array(
+      'page callback'   => 'deminy_redirect',
+      'access callback' => TRUE,
+      'type'            => MENU_CALLBACK,
+      'title'           => 'Access denied',
+      'description'     => 'You are not authorized to access this page.',
+    ),
+  );
+}
+
+/**
+ * MENU_CALLBACK for /r4034blog
+ *
+ * Redirect anonymous users from 403 Access Denied pages caused by old Serendipity URLs indexed by Google to valid
+ * Drupal URLs if possible.
+ */
+function deminy_redirect() {
+  if (array_key_exists('destination', $_GET)) {
+    $path = $_GET['destination'];
+    unset($_GET['destination']); // To prevent infinite loop for URL redirection
+
+    if (stripos($path, 'blog/') === 0) {
+      // URL moved permanently
+      drupal_goto(((stripos($path, 'blog/feeds/') === 0) ? 'sitemap.xml' : '<front>'), array(), 301);
+    }
+  }
+
+  // Display the default access denied page.
+  return theme('deminy_denied');
+}
+
+/**
+ * Display themed Access denied page.
+ */
+function theme_deminy_denied() {
+  drupal_set_title(t('Access denied'));
+  return t('You are not authorized to access this page.');
+}
+
+/**
  * Implements hook_form_alter().
  */
 function deminy_form_alter(&$form, &$form_state, $form_id) {
