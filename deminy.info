@@ -1,0 +1,12 @@
+name = Tweaks for Deminy.net
+description = Various tweaks for deminy.net
+; package = OTHER
+
+dependencies[] = comment
+dependencies[] = guestbook
+dependencies[] = locale
+
+files[] = deminy.module
+
+core = 7.x
+version = 7.x-1.x

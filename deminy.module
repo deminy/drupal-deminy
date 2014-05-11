@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Various tweaks for site deminy.net.
+ *
+ * @author Demin Yin <deminy@deminy.net>
+ */
+
+/**
+ * Implements hook_form_alter().
+ */
+function deminy_form_alter(&$form, &$form_state, $form_id) {
+  if (preg_match('/comment_node_(.+_)?form/', $form_id)
+    || (('guestbook_form_entry_form' == $form_id)
+      && !empty($form['display']['#value'])
+      && ('link' != $form['display']['#value']))) {
+  	$msg = t('NOTE: Guest comments/posts may not be displayed immediately in case spam content detected.');
+
+    if (empty($form['#prefix'])) {
+      $form['#prefix'] = '';
+    }
+    $form['#prefix'] = '<p style="color:green">' . $msg . '</p>';
+  }
+}

@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the "deminy" module.
+ */
+
+/**
+ * Implements hook_enable().
+ */
+function deminy_enable() {
+  $report = array();
+  _locale_import_one_string_db(
+    $report,
+    'zh-hans',
+    '',
+    'NOTE: Guest comments/posts may not be displayed immediately in case spam content detected.',
+    '友情提醒：您的言论自由在本站会得到充分保证；不过，由于广告留言等猖獗，因此本站的内容过滤系统有可能会暂时屏蔽您新发的留言或评论。不便之处，希望理解。',
+    'default',
+    drupal_get_path('module', 'deminy') . DIRECTORY_SEPARATOR . basename(__FILE__),
+    LOCALE_IMPORT_OVERWRITE
+  );
+}
+
+/**
+ * Implements hook_disable().
+ */
+function deminy_disable() {
+}
