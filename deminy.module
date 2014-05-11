@@ -23,19 +23,21 @@ function deminy_menu() {
 }
 
 /**
- * MENU_CALLBACK for /r4034blog
+ * MENU_CALLBACK for /r4034blog.
  *
- * Redirect anonymous users from 403 Access Denied pages caused by old Serendipity URLs indexed by Google to valid
- * Drupal URLs if possible.
+ * Redirect anonymous users from 403 Access Denied pages caused by old
+ * Serendipity URLs indexed by Google to valid Drupal URLs if possible.
  */
 function deminy_redirect() {
   if (array_key_exists('destination', $_GET)) {
     $path = $_GET['destination'];
-    unset($_GET['destination']); // To prevent infinite loop for URL redirection
+    // Unset destination to avoid infinite loop for URL redirection.
+    unset($_GET['destination']);
 
     if (stripos($path, 'blog/') === 0) {
-      // URL moved permanently
-      drupal_goto(((stripos($path, 'blog/feeds/') === 0) ? 'sitemap.xml' : '<front>'), array(), 301);
+      $path = ((stripos($path, 'blog/feeds/') === 0) ? 'sitemap.xml' : '<front>');
+      // URL moved permanently.
+      drupal_goto($path, array(), 301);
     }
   }
 
@@ -59,7 +61,7 @@ function deminy_form_alter(&$form, &$form_state, $form_id) {
     || (('guestbook_form_entry_form' == $form_id)
       && !empty($form['display']['#value'])
       && ('link' != $form['display']['#value']))) {
-  	$msg = t('NOTE: Guest comments/posts may not be displayed immediately in case spam content detected.');
+    $msg = t('NOTE: Guest comments/posts may not be displayed immediately in case spam content detected.');
 
     if (empty($form['#prefix'])) {
       $form['#prefix'] = '';
