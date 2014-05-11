@@ -23,6 +23,17 @@ function deminy_menu() {
 }
 
 /**
+ * Implements hook_theme().
+ */
+function deminy_theme() {
+  return array(
+    'deminy_denied' => array(
+      'variables' => array(),
+    ),
+  );
+}
+
+/**
  * MENU_CALLBACK for /r4034blog.
  *
  * Redirect anonymous users from 403 Access Denied pages caused by old
