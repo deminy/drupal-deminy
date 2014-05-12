@@ -77,6 +77,6 @@ function deminy_form_alter(&$form, &$form_state, $form_id) {
     if (empty($form['#prefix'])) {
       $form['#prefix'] = '';
     }
-    $form['#prefix'] = '<p style="color:green">' . $msg . '</p>';
+    $form['#prefix'] .= '<p style="color:green">' . $msg . '</p>';
   }
 }
