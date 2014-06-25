@@ -34,10 +34,11 @@ function deminy_theme() {
 }
 
 /**
- * MENU_CALLBACK for /r4034blog.
+ * Menu callback for /r4034blog.
  *
  * Redirect anonymous users from 403 Access Denied pages caused by old
- * Serendipity URLs indexed by Google to valid Drupal URLs if possible.
+ * Serendipity URLs indexed by Google (or some other search engines) to
+ * valid Drupal URLs if possible.
  */
 function deminy_redirect() {
   if (array_key_exists('destination', $_GET)) {
@@ -57,7 +58,7 @@ function deminy_redirect() {
 }
 
 /**
- * Display themed Access denied page.
+ * Display themed Access Denied page.
  */
 function theme_deminy_denied() {
   drupal_set_title(t('Access denied'));
@@ -68,7 +69,7 @@ function theme_deminy_denied() {
  * Implements hook_form_alter().
  */
 function deminy_form_alter(&$form, &$form_state, $form_id) {
-  if (preg_match('/comment_node_(.+_)?form/', $form_id)
+  if (preg_match('/^comment_node_(.+_)?form$/', $form_id)
     || (('guestbook_form_entry_form' == $form_id)
       && !empty($form['display']['#value'])
       && ('link' != $form['display']['#value']))) {
