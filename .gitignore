@@ -1,4 +1,7 @@
-# Ignore Eclipse/Zend Studio project files
+# Ignore Zend Studio and Eclipse project related files.
 .buildpath
 .project
 .settings
+
+# Ignore PhpStorm project related files.
+.idea
