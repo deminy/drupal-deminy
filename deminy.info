@@ -1,6 +1,8 @@
-name = Tweaks for Deminy.net
+name = Tweaks for deminy.net
 description = Various tweaks for deminy.net
-; package = OTHER
+package = Prebyte
+core = 7.x
+php = 5.x
 
 dependencies[] = blog
 dependencies[] = comment
@@ -9,5 +11,4 @@ dependencies[] = locale
 
 files[] = deminy.module
 
-core = 7.x
 version = 7.x-1.x
