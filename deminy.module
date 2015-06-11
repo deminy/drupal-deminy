@@ -81,3 +81,25 @@ function deminy_form_alter(&$form, &$form_state, $form_id) {
     $form['#prefix'] .= '<p style="color:green">' . $msg . '</p>';
   }
 }
+
+/**
+ * Implements hook_node_view().
+ *
+ * @see blog_view()
+ * @see blog_node_view()
+ */
+function deminy_node_view($node, $view_mode) {
+  if ($view_mode != 'rss') {
+    if ($node->type == 'blog' && (arg(0) != 'blog' || arg(1) != $node->uid)) {
+      // Don't show "deminy's blog" for each blog listed on homepage.
+      if (!empty($node->content['links']['blog']['#links']['blog_usernames_blog'])) {
+        unset($node->content['links']['blog']['#links']['blog_usernames_blog']);
+      }
+    }
+
+    if ($view_mode == 'full' && node_is_page($node)) {
+      // Don't show breadcrumb navigation on blog details page.
+      drupal_set_breadcrumb(array());
+    }
+  }
+}
