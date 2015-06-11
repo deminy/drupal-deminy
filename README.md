@@ -1,6 +1,7 @@
 # Summary
 
-This Drupal module contains various tweaks customized for personal website deminy.net.
+This Drupal module contains various tweaks customized for personal website deminy.net, with source code hosted at
+https://github.com/deminy/deminy.
 
 ## Tweak One: Redirect 403 pages caused during site migration from S9Y to Drupal.
 
